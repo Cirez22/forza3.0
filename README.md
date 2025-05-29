@@ -1,3 +1,5 @@
+BOLT https://bolt.new/github.com/Cirez22/forza3.0
+
 # FORZA
 
 A minimalist black and white React application with Supabase integration.
