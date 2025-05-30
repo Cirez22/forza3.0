@@ -14,7 +14,6 @@ import CommunityPage from './pages/dashboard/community';
 import LandingPage from './pages/landing';
 import AdminDashboard from './pages/admin/AdminDashboard';
 
-// Protected route component with role check
 const ProtectedRoute: React.FC<{ 
   children: React.ReactNode;
   allowedRoles?: string[];
@@ -39,10 +38,7 @@ const ProtectedRoute: React.FC<{
     return <Navigate to="/dashboard" />;
   }
 
-  // Additional check for resource ownership if required
   if (requireOwnership && resourceId) {
-    // You can implement specific ownership checks here
-    // For now, we'll let the RLS policies handle this
     return <>{children}</>;
   }
   
@@ -52,7 +48,6 @@ const ProtectedRoute: React.FC<{
 const AppRoutes: React.FC = () => {
   const { profile } = useAuth();
 
-  // Redirect to appropriate dashboard based on role
   const handleDashboardRedirect = () => {
     if (profile?.role === 'admin' || profile?.role === 'superadmin') {
       return <Navigate to="/admin" />;
@@ -66,7 +61,6 @@ const AppRoutes: React.FC = () => {
       <Route path="/login" element={<AuthPage />} />
       <Route path="/register" element={<AuthPage />} />
       
-      {/* Regular user routes */}
       <Route 
         path="/dashboard" 
         element={
@@ -94,7 +88,6 @@ const AppRoutes: React.FC = () => {
         <Route path="community" element={<CommunityPage />} />
       </Route>
 
-      {/* Admin routes */}
       <Route 
         path="/admin" 
         element={
@@ -104,7 +97,6 @@ const AppRoutes: React.FC = () => {
         } 
       />
 
-      {/* Default redirect based on role */}
       <Route path="*" element={handleDashboardRedirect()} />
     </Routes>
   );
